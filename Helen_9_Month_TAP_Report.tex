@@ -32,35 +32,75 @@ labelsep=endash]{caption}
 \maketitle
 
 \section{Low Temperature Plasmas and Wound Healing}
-\begin{itemize}
-\item Wound statistics. Try to find some up to date stats, possibly UK and globally.
-\item Standard wound care protocols and their pros and cons
-\item Aim for low temperature plasmas
-\item Briefly what has been seen before
-\item Brief summary of all the lit review I did for the last TAP on LTP/bio interactions - refs from there :)
-\end{itemize}
+Wounds and their management present an issue, both in the UK and globally \cite{Posnett2008the}.
+In particular, chronic wounds present a significant socio-economic burden, with 1-2 \% of the population of developed countries expected to develop a chronic wound during their lifetime \cite{Siddiqui2010chronic}, and the estimated cost of wounds to the national health service (NHS) in 2012/13 was £5 billion \cite{Guest2015health}.
+Alongside this, chronic wounds can have a significant detrimental effect on the mental health of patients, for example, due to pain, odour, mobility issues and stress as a direct result of having a chronic wound \cite{Persoon2004leg}.
+New wound treatment strategies are being sought, with aims to acclerate the wound healing process to decrease the risk of infection and to decrease the bacterial load in the wound. One technique under investigation is low temperature plasma (LTP), which has shown promise for both reducing the bacterial load in a wound and promoting the healing process \cite{Kong2009plasma, Kramer2013suitability, Isbary2012successful, Isbary2010a}.
+
+Low temperature plasmas (LTP) are weakly ionised plasmas, existing far from thermodynamic equilibrium.
+This results in a plasma that has an overall temperature of $\approx$ 25-40$^\circ$C, which can be applied to biological samples without causing thermal damage. 
+Evidence for the successful use of LTP in wound healing comes from both laboratory experiments and clinical trials.
+For example, the ability of LTP to enhance keratinocyte migration and proliferation in scratch test assays has been demonstrated in the laboratory \cite{Tipa2011plasma}, and clinically, devices such as KinPen and MicroPlaSter have shown promise when used on human patients, aiding healing without any obvious side-effects \cite{Isbary2013cold, Isbary2012successful, Isbary2010a, Bekeschus2016the}.
+
+For the proposed mechanism of action for LTPs in both wound healing promotion and bacterial killing, please refer to my 6 month TAP report.
+
 
 \subsection{Project Aims}
-
+The overall aims of the project are to investigate the use of low temperature air plasma for wound healing applications. In particular:
 \begin{enumerate}
-\item Development of air plasma - suitable for optical diagnostics \& treatment of biological samples
-\item Characterisation of plasma - Experimental \& Computational. Optical diagnostics will be used to determine species densities in the plasma, whilst a global model will be developed alongside to be able to help with species density predictions and guiding of experiments.
-\item Biology experiments - Oxidative Stress \& Healing Promotion
-\item Correlation between plasmas and biological results - Is there evidence to correlate particular species to particular biological responses?
+\item Develop an air plasma source that is suitable for optical diagnostics \& treatment of biological samples
+\item Characterise the plasma using optical diagnostic techniques to determine species densities, alongside the use of a global model, which will help with species densities predictions and guiding of experiments
+\item Develop experiments to determine the effects of low temperature air plasma on biological samples \textit{in vitro}, for example, oxidative stress induction and wound healing promotion. Using these experiments, the difference in biological effects when plasma parameters (and, therefore, plasma composition) are changed can be investigated.
 \end{enumerate}
 
 
 \section{Work to Date}
 \subsection{Simulations}
-Previously:
-\begin{itemize}
-\item GlobalKin - 0D global plasma chemistry model
-\item PumpKin - pathways analysis tool
-\item Nitrogen chemistry set - as a first step to a air plasma model, nitrogen is a good start. Previously I presented the chemistry set so far. It has 31 species and over 200 reactions involving electrons, heavy particles and some vibrational kinetics.
-However, I also pointed out that some areas were missing, in particular some vibrational kinetics.
-\end{itemize}
+In the last few months I have been continuing with plasma simulations, in particular, the development of a comprehensive nitrogen chemistry set for use in GlobalKin.
+GlobalKin is a global plasma chemistry model that calculated time evolved species densities given plasma power, geometry and feed gas, as shown in \textbf{figure \ref{fig:GlobalKin}} \cite{Stafford2004O2}.
+For detailed information on this model, please refer to my 3 and 6 month TAP reports.
+
+In the last TAP meeting I presented the nitrogen chemistry, with its 31 species and over 200 reactions including electron impact reactions, heavy particle reactions and vibrational kinetics.
+I also highlighted areas for improvement, in particular, vibration-vibration (V-V) and vibration-translation (V-T) reactions and rates.
+This is what I will discuss next.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Figures/GlobalKin}
+\caption{Diagram outlining how GlobalKin works. Firstly, ODEs for species density and electron temperature are constructed. This takes direct GlobalKin inputs specified by the user, as well as electron reaction rate coefficients, diffusion coefficients and mobilities from the Boltzmann solver. An ODE solver then solves the equations and the new species densities are fed back into the ODEs and Boltzmann solver, for new densities to be calculated. At regular intervals, the Boltzmann solver also updates and new coefficients are fed back into the ODEs for the ODE solver to work with. This results in the time evolution of species densities and electron temperatures.}
+\label{fig:GlobalKin}
+\end{figure}
+
 
 \subsection{Vibration-vibration reactions in nitrogen plasmas}
+
+As mentioned previously, vibrational kinetics are important to include in plasma chemistries, due to their influence on the electron energy distribution function (EEDF) through population of vibrationally excited states by electron impact (\textbf{equation \ref{eqn:ElectronVibration}}: and superelastic collisions between electrons and vibrationally excited states (whereby electrons gain energy, \textbf{equation \ref{eqn:SuperelasticVibrational}}).
+\begin{equation}
+e^- + N_2(X,v=0) \rightarrow N_2(X,v=1) + e^-
+\label{eqn:ElectronVibration}
+\end{equation}
+\begin{equation}
+e^- + N_2(X,v=1) \rightarrow N_2(X,v=0) + e^-
+\label{eqn:SuperelasticVibrational}
+\end{equation}
+Reactions involving vibrationally excited states also have an impact on nitrogen dissociation and gas heating, therefore, should be included to make the model as realistic as possible.
+The first type of reactions to include are V-T reactions. These are particularly important for gas heating and are when vibrationally excited states collide with either molecular or atomic nitrogen as follows:
+\begin{equation}
+N_2(X,v=n) + N_2 (X,v=0) \rightarrow N_2(X,v=n-1) + N_2(X,v=0)
+\label{eqn:V-TN2}
+\end{equation}
+\begin{equation}
+N_2(X,v=n) + N \rightarrow N_2(X,v=n-1) + N
+\label{eqn:V-TN}
+\end{equation}
+
+The second type are V-V reactions, where two vibrationally excited states collide and vibrational energy is transferred between molecules, as follows:
+\begin{equation}
+N_2(X,v=w) + N_2 (X,v=n) \rightarrow N_2(X,v=w-1) + N_2(X,v=n+1)
+\label{eqn:V-V}
+\end{equation}
+
+
 \begin{itemize}
 \item V-V reactions are important to include.... Why?
 \item \begin{equation} N_2(X,v=w) + N_2 (X,v=n) \rightarrow N_2(X,v=w-1) + N_2(X,v=n+1)
@@ -84,6 +124,7 @@ This would be extremely useful as it would allow calculation of all VV reactions
 \item Experimental nitrogen plasma will be ignited using a pulsed power supply, therefore need to simulate pulsed power too
 \item GlobalKin specifies power density in time, therefore, can define power cycle
 \item Can show electron kinetics during pulsing, \textbf{figure \ref{fig:pulsed_electrons}}
+\item pulsed He/O2 
 \end{itemize}
 
 \begin{figure}
@@ -143,10 +184,13 @@ A power variation for the temperature of the plasma effluent was also carried ou
 
 \begin{itemize}
 \item Need a plasma source for pure nitrogen plasma to benchmark model
-\item Parallel plate configuration. Nanosecond pulses. Anything else electric-y?
+\item Parallel plate configuration. Nanosecond pulses. Anything else electric-y? Rise time, on time and off time. Want short rise and fall and can tune the on time to control the chemistry. In the off, electrons decay very quickly and are lost but the longer lived species last longer. Short lived things are also lost eg atoms. Controls heat. So things heat up through electrons colliding with neutrals/heavy particles so by longer on time, more chance of collisions so even through small energy transfers, the neutrals heat up so everything heats up. Therefore, by keeping the pulses short, chemistry continues but the heating processes slow down/stop (kind of like reducing the power cos electrons won't totally lose all their energy probably) so everything doesn't heat up as much. 
+Molecules are also worse for heating because at atmopheric pressure there are a lot of collisions and a lot of energy can be stored by the molecules in internal degrees of freedom (eg excited states), therefore, need more energy to breakdown, and they can store more heat too, so everything gets hotter more.
 \item Picture of source? \todo{Take a picture of source!} \textbf{figure \ref{fig:plasma_source}}
 \item Take measurements of atomic nitrogen
-\item TALIF?
+\item TALIF? Problems with this are quenching. So excited states are lost through collisions with quenching partners. For things like pure nitrogen, we can know the quenching partners (e.g. N$_2$) so can deal with that, but for things like air, we don't know all the quenching partners so it is a problem because we can't understand the behaviour of them all. However, the problem with quenching is the reduction in the lifetime of the excited state.
+So to counteract this, we have to diagnose plasma on very short timescales. Therefore, use picosecond laser pulses and very fast detectors, to be able to detect the LIF before quenching is a problem.
+Air is a further problem, because the timescales are even shorter, so the picosecond setup might not work.... but we'll worry about that when it happens...
 \end{itemize}
 
 \begin{figure}
@@ -159,7 +203,7 @@ A power variation for the temperature of the plasma effluent was also carried ou
 \subsection{Biology Aims}
 
 \begin{itemize}
-\item Wound healing is of interest. For the time being, host cells will be investigated. Particularly important from a safety point of view, as well as the potential for promoting the healing response
+\item Wound healing is of interest. For the time being, host, eukaryotic, skin cells will be investigated. Particularly important from a safety point of view, as well as the potential for promoting the healing response.
 \item Need to decide on the experiment end point, i.e. what to measure
 \item Oxidative Stress?
 \item Wound Healing?
