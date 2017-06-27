@@ -11,6 +11,7 @@
 \usepackage{color}
 \usepackage{subcaption}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage[margin=10pt,font=small,labelfont=bf,
 labelsep=endash]{caption}
 
@@ -72,8 +73,9 @@ This is what I will discuss next.
 \end{figure}
 
 
-\subsection{Vibration-vibration reactions in nitrogen plasmas}
+\subsection{Vibrational Kinetics in Nitrogen Plasmas}
 
+\subsubsection{Vibration-Vibration Reaction Rates}
 As mentioned previously, vibrational kinetics are important to include in plasma chemistries, due to their influence on the electron energy distribution function (EEDF) through population of vibrationally excited states by electron impact (\textbf{equation \ref{eqn:ElectronVibration}}: and superelastic collisions between electrons and vibrationally excited states (whereby electrons gain energy, \textbf{equation \ref{eqn:SuperelasticVibrational}}).
 \begin{equation}
 e^- + N_2(X,v=0) \rightarrow N_2(X,v=1) + e^-
@@ -114,9 +116,26 @@ I think that the most likely issue is that either there is a typographical error
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{Figures/paper_vs_equations}
+\includegraphics[width=0.7\textwidth]{Figures/paper_vs_equations}
 \caption{VV rates from Pintassilgo and Guerra, 2017 \cite{Pintassilgo2017modelling} shown by the points. VV rates calculated from equations by Alves \textit{et al}, 2012 \cite{Alves2012capacitively} shown by the solid lines. Red shows $N_2(v=1) + N_2(v=w-1) \rightarrow N_2(v=0) + N_2(v=w)$, while the blue represents the reverse reaction}
 \label{fig:paper_vs_equations}
+\end{figure}
+
+\subsubsection{Vibration-Translation Reaction Rates}
+
+Vibration-Translation reactions are also important reactions to include as they are one of the main gas heating mechanisms in nitrogen plasmas \cite{Pintassilgo2017modelling}. 
+While these have been included in my chemistry set until now, they have been taken from Billing and Fisher, 1979 \cite{Billing1979vv}, however, it was thought that these rates were too high, therefore a new method for calculating the rates has been presented by Guerra \textit{et al} \cite{Guerra2004kinetic} and again by Alves \textit{et al} \cite{Alves2012capacitively}.
+This is the method referenced by Pintassilgo and Guerra in their publication earlier this year \cite{Pintassilgo2017modelling}.
+However, as with the V-V reaction rates shown above, using the equations referenced, I have been unable to replicate the rates they present in a graph in their paper.
+The two sets of rates are shown in \textbf{figure \ref{fig:atomic_VT_comparison}}.
+Unfortunately, there are many orders of magnitude difference between the rates, which is not helpful :-(.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Figures/atomic_VT_comparison}
+\caption{VT rates comparison}
+\label{fig:atomic_VT_comparison}
 \end{figure}
 
 \subsection{Pulsed Plasma Simulations}
@@ -129,10 +148,21 @@ For both, the plasma geometry (3 x 1 x 1.1 cm channel) and maximum power (13.56 
 For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the whole channel, whereas for the pulsed situation, the $\mu$ second scale pulses have a rise time of 2.4 $\mu$s, on time of 20 $\mu$s, fall time of 3.1 $\mu$ and the period of the cycle is 100 $\mu$s.
 
 \begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{Figures/pulse_power}
-\caption{Figure showing power during pulsed power cycle in GlobalKin}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{Figures/pulse_power}
+\caption{Power}
 \label{fig:pulsed_power}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\textwidth]{Figures/pulse_Tgas}
+\caption{Gas temperature}
+\end{subfigure}
+\begin{subfigure}{\textwidth}
+\centering
+\includegraphics[width=0.5\textwidth]{Figures/pulse_OH}
+\caption{OH Density}
+\end{subfigure}
+\caption{Figure showing comparisons for different plasma properties and hydroxyl (OH) density when the power applied to the same plasma channel is either pulsed, or not pulsed. Plasma channel is 3 x 1.1 x 0.1 cm. Power density is 60.61 Wcm$^{-3}$.}
 \end{figure}
 
 
@@ -143,12 +173,6 @@ For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the wh
 \item pulsed He/O2 
 \end{itemize}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{Figures/pulsed_electrons}
-\caption{Figure showing electron densities during pulsed power cycle in GlobalKin}
-\label{fig:pulsed_electrons}
-\end{figure}
 
 \subsection{Membrane Damage}
 
@@ -161,18 +185,20 @@ Using a membrane dye, FM4-64, the integrity of the bacterial membrane can be inv
 The plasma source used consists of two plane-parallel electrodes which are \todo{Dimensions}, with the channel enclosed by clear windows, forming a channel of \todo{Dimensions/Volume}. 
 One electrode is driven by a 13.56 MHz radio frequency (RF) generator via an impedence matching box, while the other is grounded. 
 The applied voltage was measured using a voltage probe (between the matching box and plasma source) and oscilloscope.
-The voltage was kept constant at \todo{Voltage used... 560 or 640V?}.
+The voltage was kept constant at 640 V.
 The feed gas was 1 slm Helium, admixed with 5 sccm oxygen (0.5\%), controlled by mass flow controllers. 
 The plasma jet was positioned so that the tip was 2 cm above the surface of the cell suspension.
 
 E.coli MG1655 were prepared in biology by Paulina Dubiel. 
 They were grown to an OD600 of 2.7, then 1 mL of cell suspension was placed in a well of a 48 well plate for plasma treatment in YPI.
 The depth of the liquid was approximately 0.5 cm.
-Following exposure, cells were stained with FM4-64 dye at \todo{Dilution} then put on microscope slides, covered with coverslip, then sealed with nail varnish and viewed using \todo{Confocal microscopy??}
+Following exposure, cells were stained with FM4-64 dye then put on microscope slides, covered with a coverslip, then sealed with nail varnish and viewed using fluorescence microscopy.
 
 A picture of the treatment setup is shown in \textbf{figure \ref{fig:setup_pic}}.
-The length of treatment was varied between 30 seconds and \todo{Max treatment time}.
-Three controls were included: (1) Untreated, (2) Treated with gas flow only and (3) Treated by power only (i.e. power on, but no gas flow so no plasma).
+The length of treatment was varied between 30 seconds and 120 seconds.
+An untreated control was included. 
+However for future experiments, further controls that will also be included are (1) cells treated only with gas flow and (2)
+cells treated by power only (i.e. power on, but no gas flow so no plasma).
 
 \subsubsection{Results}
 
@@ -203,7 +229,19 @@ The pictures show.....
 
 \subsection{Simulations}
 \subsubsection{V-V and V-T reactions and rates}
+
+Since finding the discrepancies between the calculated and presented V-V and V-T rates, I have emailed Vasco Guerra directly to see if he is able to offer any help on the differences seen.
+Once this has been rectified, hopefully I should have a method for calculating the rates for each reaction for each vibrational quantum number.
+This would be highly beneficial for developing the nitrogen chemistry set further.
+
+
 \todo{When Vasco replies}
+
+\subsubsection{Correcting for Pressure}
+Currently, the reaction set I am working from from \cite{Kutasi2016tuning}, is concerned with low pressure plasmas.
+However, my aim is to develop the model for atmospheric pressure plasmas.
+In order to make it suitable for high pressures, I need to make sure that no reactions are missing that are particularly important at high pressures.
+Once such class of reactions are three body reactions \todo{What are 3 body reactions? Are they the ones that require a third body to work? and that the pressure is important because of the probability of that third body being present?}.
 
 
 %\begin{itemize}
@@ -241,7 +279,7 @@ Following this, some longer lived species will remain until the next pulse, when
 Therefore, the benchmarking nitrogen plasma will be powered by pulses, with short rise and fall times, and a suitable on time such that the plasma chemistry can progress, but the heating processes are not too great to heat the plasma excessively.
 For this to work, the pulses will be on the nanosecond time scale.
 
-\textbf{Figure \ref{fig:plasma_source}} shows a picture of the plasma source in its current state. \todo{Ask Jerome about the source....}
+\textbf{Figure \ref{fig:plasma_source}} shows a diagram of the plasma source. \todo{Ask Jerome about the source....}
 
 Once the plasma source is in operation, the aim is to measure atomic nitrogen density using two-photon absorption laser-induced fluorescence (TALIF).
 For this technique, two photons of a specific wavelength will excite ground state nitrogen \todo{Atomic?} to an excited state.
@@ -269,8 +307,15 @@ As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra 
 
 \begin{figure}
 \centering
+\includegraphics[width=0.8\textwidth]{Figures/plasma_diagram}
+\caption{Plasma source}
+\label{fig:plasma_diagram}
+\end{figure}
+
+\begin{figure}
+\centering
 \includegraphics[width=\textwidth]{Figures/Harry}
-\caption{Haribo}
+\caption{Haribo $<$3}
 \label{fig:plasma_source}
 \end{figure}
 
