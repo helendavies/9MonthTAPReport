@@ -26,22 +26,23 @@ labelsep=endash]{caption}
 
 
 \title{9 Month TAP Report}
-\author{Me :)}
+\author{By Me :)}
 \date{}							% Activate to display a given date or no date
 
 \begin{document}
 \maketitle
 
 \section{Low Temperature Plasmas and Wound Healing}
-Wounds and their management present an issue, both in the UK and globally \cite{Posnett2008the}.
+Wounds and their management present an issue, both in the UK and globally \cite{Posnett2008the}. 
 In particular, chronic wounds present a significant socio-economic burden, with 1-2 \% of the population of developed countries expected to develop a chronic wound during their lifetime \cite{Siddiqui2010chronic}, and the estimated cost of wounds to the national health service (NHS) in 2012/13 was £5 billion \cite{Guest2015health}.
-Alongside this, chronic wounds can have a significant detrimental effect on the mental health of patients, for example, due to pain, odour, mobility issues and stress as a direct result of having a chronic wound \cite{Persoon2004leg}.
-New wound treatment strategies are being sought, with aims to acclerate the wound healing process to decrease the risk of infection and to decrease the bacterial load in the wound. One technique under investigation is low temperature plasma (LTP), which has shown promise for both reducing the bacterial load in a wound and promoting the healing process \cite{Kong2009plasma, Kramer2013suitability, Isbary2012successful, Isbary2010a}.
+Alongside this, chronic wounds can have a significant detrimental effect on the mental health of patients, for example, due to pain, odour, mobility issues and stress, as a direct result of having a chronic wound \cite{Persoon2004leg}.
+New wound treatment strategies are being sought, with aims to accelerate the wound healing process and decrease the bacterial load in the wound, to decrease the risk of infection.
+One technique under investigation is low temperature plasma (LTP) treatment, which has shown promise for both reducing bacterial loads in wounds and promoting the healing process \cite{Kong2009plasma, Kramer2013suitability, Isbary2012successful, Isbary2010a}.
 
 Low temperature plasmas (LTP) are weakly ionised plasmas, existing far from thermodynamic equilibrium.
 This results in a plasma that has an overall temperature of $\approx$ 25-40$^\circ$C, which can be applied to biological samples without causing thermal damage. 
 Evidence for the successful use of LTP in wound healing comes from both laboratory experiments and clinical trials.
-For example, the ability of LTP to enhance keratinocyte migration and proliferation in scratch test assays has been demonstrated in the laboratory \cite{Tipa2011plasma}, and clinically, devices such as KinPen and MicroPlaSter have shown promise when used on human patients, aiding healing without any obvious side-effects \cite{Isbary2013cold, Isbary2012successful, Isbary2010a, Bekeschus2016the}.
+For example, the ability of LTP to enhance keratinocyte migration and proliferation has been demonstrated in the laboratory \cite{Tipa2011plasma}, and clinically, devices such as KinPen and MicroPlaSter have shown promise when used on human patients, aiding healing without any obvious side-effects \cite{Isbary2013cold, Isbary2012successful, Isbary2010a, Bekeschus2016the}.
 
 For the proposed mechanism of action for LTPs in both wound healing promotion and bacterial killing, please refer to my 6 month TAP report.
 
@@ -61,9 +62,8 @@ In the last few months I have been continuing with plasma simulations, in partic
 GlobalKin is a global plasma chemistry model that calculated time evolved species densities given plasma power, geometry and feed gas, as shown in \textbf{figure \ref{fig:GlobalKin}} \cite{Stafford2004O2}.
 For detailed information on this model, please refer to my 3 and 6 month TAP reports.
 
-In the last TAP meeting I presented the nitrogen chemistry, with its 31 species and over 200 reactions including electron impact reactions, heavy particle reactions and vibrational kinetics.
-I also highlighted areas for improvement, in particular, vibration-vibration (V-V) and vibration-translation (V-T) reactions and rates.
-This is what I will discuss next.
+In the last TAP meeting I presented the nitrogen chemistry set, with its 31 species and over 200 reactions including electron impact reactions, heavy particle reactions and vibrational kinetics.
+I also highlighted areas for improvement, in particular, vibration-vibration (V-V) and vibration-translation (V-T) reactions and rates, which has been my focus for the last few months.
 
 \begin{figure}
 \centering
@@ -75,8 +75,7 @@ This is what I will discuss next.
 
 \subsection{Vibrational Kinetics in Nitrogen Plasmas}
 
-\subsubsection{Vibration-Vibration Reaction Rates}
-As mentioned previously, vibrational kinetics are important to include in plasma chemistries, due to their influence on the electron energy distribution function (EEDF) through population of vibrationally excited states by electron impact (\textbf{equation \ref{eqn:ElectronVibration}}: and superelastic collisions between electrons and vibrationally excited states (whereby electrons gain energy, \textbf{equation \ref{eqn:SuperelasticVibrational}}).
+As mentioned previously, vibrational kinetics are important to include in plasma chemistries, due to their influence on the electron energy distribution function (EEDF) through population of vibrationally excited states by electron impact (electrons losing energy, \textbf{equation \ref{eqn:ElectronVibration}}), and superelastic collisions between electrons and vibrationally excited states (electrons gaining energy, \textbf{equation \ref{eqn:SuperelasticVibrational}}).
 \begin{equation}
 e^- + N_2(X,v=0) \rightarrow N_2(X,v=1) + e^-
 \label{eqn:ElectronVibration}
@@ -102,17 +101,24 @@ N_2(X,v=w) + N_2 (X,v=n) \rightarrow N_2(X,v=w-1) + N_2(X,v=n+1)
 \label{eqn:V-V}
 \end{equation}
 
-GlobalKin requires each heavy particle reaction to have a rate specified in Arrhenius form.
-Whilst most reaction rates can be found in literature, rates for V-V reactions are not widely available, other than for n = 1 $\rightarrow$ 0 and it's reverse reaction.
-Some rates are stated in Billing and Fisher, 1979 \cite{Billing1979vv}, however, in a recent paper from Pintassilgo and Guerra \cite{Pintassilgo2017modelling}, new rates were published for both V-V and V-T reactions. 
-Importantly, this paper also referenced equations for calculating rates from Alves \textit{et al}, 2012 \cite{Alves2012capacitively}, which means that further reaction rates, for different vibrational quantum numbers can be calculated.
+GlobalKin requires each heavy particle reaction to have a rate specified in Arrhenius form, while electron impact reaction rates require cross sections, which are built in to GlobalKin.
+
+\subsubsection{Vibration-Vibration Reaction Rates}
+
+Whilst most reaction rates can be found in literature, rates for vibration-vibration (V-V) reactions are not widely available, other than for n = 1 $\rightarrow$ 0 and it's reverse reaction.
+Some rates are stated in Billing and Fisher, 1979 \cite{Billing1979vv}, however, in a recent paper from Pintassilgo and Guerra \cite{Pintassilgo2017modelling}, new rates were published for both V-V and V-T reactions, where $n = 0\rightarrow 1$ (and the reverse reaction $n = 1\rightarrow0$.) 
+Importantly, this paper also referenced equations for calculating rates from Alves \textit{et al}, 2012 \cite{Alves2012capacitively}, which means that further reaction rates, for different vibrational quantum numbers ($n$ and $w$) can be calculated.
 
 Using the equations in \cite{Alves2012capacitively}, I have tried to replicate the rates published in \cite{Pintassilgo2017modelling}.
 However, so far, I have been unable to replicate the rates.
 As shown in \textbf{figure \ref{fig:paper_vs_equations}}, whilst the trend in the data matches, unfortunately, the absolute numbers are not replicable, with the calculated rates (solid lines) being consistently lower than those published in \cite{Pintassilgo2017modelling} (points).
 
-Since having this problem, I have contacted Vasco Guerra to see if he is able to shed any light on the problems I am having.
-I think that the most likely issue is that either there is a typographical error in the Alves \textit{et al} equations, or that Pintassilgo and Guerra have used some form of correction factor to calculate the rates, and not included it in their publication.
+I have tried reproducing this many times, both by hand and using Matlab scripts, and I have cross checked with different publications that give parts of the equations. 
+I have found one typo between two different papers, but changing that made it more wrong.
+I have tried different temperatures, to see if maybe they have stated the wrong temperatures for the rates, but nothing works.
+Andrew Gibson has also had a look and is unsure of why everything doesn't match.
+Therefore, I have emailed the author, Vasco Guerra, with the issues I am having to see if he will be able to shed any light on the problem.
+I think that the most likely issue is that either there is a typographical error in the Alves \textit{et al} equations, or that Pintassilgo and Guerra have used some form of correction factor to calculate the rates, and not included it in their publication. \todo{Maybe re-write this with better wording... less frustration...!}
 
 \begin{figure}
 \centering
@@ -130,6 +136,7 @@ However, as with the V-V reaction rates shown above, using the equations referen
 The two sets of rates are shown in \textbf{figure \ref{fig:atomic_VT_comparison}}.
 Unfortunately, there are many orders of magnitude difference between the rates, which is not helpful :-(.
 
+Similarly to the V-V rate discrepancies, I have tried many things to fix the problem, but have so far been unsuccessful.
 
 \begin{figure}
 \centering
@@ -138,10 +145,21 @@ Unfortunately, there are many orders of magnitude difference between the rates, 
 \label{fig:atomic_VT_comparison}
 \end{figure}
 
+\subsubsection{Testing Vibrational Kinetics Rates}
+
+To test what difference the different rates have, it would be useful to be able to see what effects the different rates have on the VDF for each case, along with the atomic nitrogen density.
+However, there are issues with doing this as the moment.
+
+For V-T reactions, the rates shown in Pintassilgo suggest that VT reactions do not happen at an appreciable rate for quantum numbers below 22.
+My chemistry set only contains the first 17 vibrational states of ground state nitrogen, therefore, I would have to neglect the V-T reactions entirely... 
+For V-V reactions, it is hard to test them at this stage, because only having 1-0 and 0-1 skews the VDF anyway, and there are no other rates available that I have found for any other n values, therefore there is nothing to compare against.
+
 \subsection{Pulsed Plasma Simulations}
 
 Since any nitrogen or air plasmas will need to be pulsed, I have investigated using GlobalKin to simulate pulsed plasmas.
 For this, I used a He/O$_2$ chemistry set, developed by Sandra Schr\"oter, and compared the densities of different species, along with the gas temperature.
+GlobalKin calculates time evolved species densities, and allows you to specify a power cycle.
+
 
 \textbf{Figure \ref{fig:pulsed_power}}, shows the different power depositions in the pulsed and non-pulsed situations.
 For both, the plasma geometry (3 x 1 x 1.1 cm channel) and maximum power (13.56 MHz, 60.61 Wcm$^{-3}$) is the same.
@@ -166,33 +184,25 @@ For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the wh
 \end{figure}
 
 
-\begin{itemize}
-\item Experimental nitrogen plasma will be ignited using a pulsed power supply, therefore need to simulate pulsed power too
-\item GlobalKin specifies power density in time, therefore, can define power cycle
-\item Can show electron kinetics during pulsing, \textbf{figure \ref{fig:pulsed_electrons}}
-\item pulsed He/O2 
-\end{itemize}
-
-
 \subsection{Membrane Damage}
 
 \subsubsection{Aims}
-In collaboration with a biology summer student, we have begun to investigate the effects of LTP treatment on the membrane of E.coli MG1655.
-Using a membrane dye, FM4-64, the integrity of the bacterial membrane can be investigated using \todo{Check, is it confocial microscopy?}.
+In collaboration with a biology summer student, we have begun to investigate the effects of LTP treatment on the membrane of \textit{E. coli} MG1655.
+Using a membrane dye, FM4-64, the integrity of the bacterial membrane can be investigated using fluorescence microscopy.
 
 \subsubsection{Methods}
 
-The plasma source used consists of two plane-parallel electrodes which are \todo{Dimensions}, with the channel enclosed by clear windows, forming a channel of \todo{Dimensions/Volume}. 
+The plasma source used consists of two plane-parallel electrodes, with the channel enclosed by clear windows, forming a channel of 3 x 0.1 x 0.1 cm. 
 One electrode is driven by a 13.56 MHz radio frequency (RF) generator via an impedence matching box, while the other is grounded. 
 The applied voltage was measured using a voltage probe (between the matching box and plasma source) and oscilloscope.
 The voltage was kept constant at 640 V.
 The feed gas was 1 slm Helium, admixed with 5 sccm oxygen (0.5\%), controlled by mass flow controllers. 
 The plasma jet was positioned so that the tip was 2 cm above the surface of the cell suspension.
 
-E.coli MG1655 were prepared in biology by Paulina Dubiel. 
+\textit{E. coli} MG1655 were prepared in biology by Paulina Dubiel. 
 They were grown to an OD600 of 2.7, then 1 mL of cell suspension was placed in a well of a 48 well plate for plasma treatment in YPI.
 The depth of the liquid was approximately 0.5 cm.
-Following exposure, cells were stained with FM4-64 dye then put on microscope slides, covered with a coverslip, then sealed with nail varnish and viewed using fluorescence microscopy.
+Following exposure, cells were stained with FM4-64 dye (at 30 $\mu$M concentration) then put on microscope slides, covered with a coverslip, then sealed with nail varnish and viewed using fluorescence microscopy.
 
 A picture of the treatment setup is shown in \textbf{figure \ref{fig:setup_pic}}.
 The length of treatment was varied between 30 seconds and 120 seconds.
@@ -201,14 +211,21 @@ However for future experiments, further controls that will also be included are 
 cells treated by power only (i.e. power on, but no gas flow so no plasma).
 
 \subsubsection{Results}
+Cells were treated with plasma for 30, 60, 90 or 120 seconds.
+\textbf{Figure \ref{fig:results}} shows a representative microscopy image of a cell sample treated for 120 seconds.
+Healthy cells with intact membranes should be bright red.
+However, while there are many cells that are bright red, there are a few which show only a dim halo of fluorescence, suggesting that their membrane is damaged.
+However, this is not certain and in the future, to help with determination of truly damaged cells, it has been suggested that we try an intracellular stain, that can only enter the cell if the membrane is damaged.
+This way, it should give a clearer idea as to whether the cells are live, with a healthy membrane, or dead with membrane damage.
 
-The temperature of the plasma effluent incident on the cells was measured using a thermocouple 2 cm below the end of the plasma channel.
-The temperature was $\approx$ X$^\circ$C \todo{Temperature for treatments}.
-Changing the applied voltage affected the temperature as shown in \textbf{figure \ref{fig:voltage_temp}}.
-\todo{Fill in gaps....!}
+%TEMPERATURE????
 
-Preliminary results are shown in \textbf{figure \ref{fig:results}}.... \todo{Get more pictures from Paulina!}.
-The pictures show.....
+
+%The temperature of the plasma effluent incident on the cells was measured using a thermocouple 2 cm below the end of the plasma channel.
+%The temperature was $\approx$ X$^\circ$C \todo{Temperature for treatments}.
+%Changing the applied voltage affected the temperature as shown in \textbf{figure \ref{fig:voltage_temp}}.
+
+
 
 \begin{figure}
 \centering
@@ -219,8 +236,8 @@ The pictures show.....
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{Figures/cells}
-\caption{Picture showing the 120 s treated E.coli. Red is membrane, yellow is everything and black is non-fluorescing stuff...}
+\includegraphics[width=0.5\textwidth]{Figures/120s_cells}
+\caption{Image showing \textit{E. coli} stained with FM4-64 following 120 second treatment with He:O$_2$ LTP. Bright red cells indicate healthy intact membranes, whereas the dim red outlines of cells suggest that their membranes are damaged.}
 \label{fig:results}
 \end{figure}
 
@@ -237,11 +254,14 @@ This would be highly beneficial for developing the nitrogen chemistry set furthe
 
 \todo{When Vasco replies}
 
-\subsubsection{Correcting for Pressure}
+\subsubsection{Correcting for Pressure and Other things...}
 Currently, the reaction set I am working from from \cite{Kutasi2016tuning}, is concerned with low pressure plasmas.
 However, my aim is to develop the model for atmospheric pressure plasmas.
 In order to make it suitable for high pressures, I need to make sure that no reactions are missing that are particularly important at high pressures.
 Once such class of reactions are three body reactions \todo{What are 3 body reactions? Are they the ones that require a third body to work? and that the pressure is important because of the probability of that third body being present?}.
+
+Also, need to fix temperature evolution. The model currently gives very weird looking temperature evolution data.
+This is all part of the requirement for benchmarking as there are other things that look weird too, but that can be investigated more by benchmarking. e.g. having real powers and geometry rather than guessing etc.
 
 
 %\begin{itemize}
@@ -320,13 +340,13 @@ As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra 
 \end{figure}
 
 \subsection{Effects of LTP on Wound Healing}
-
-\begin{itemize}
-\item Determining ox stress levels - markers for oxidative stress and how to measure them. Death, normal stuff RNA stuff?
-\item Determining wound healing promotion - scratch test and if time allows, a 3D skin model, e.g. MatTek EpiDerm FT.
-\item Draw a graph that has extent of ox stress and healing promotion on y axes, and changing plasma property on x axis
-\item In the future, would be good to repeat this with bacteria, to see if the effects are similar
-\end{itemize}
+%
+%\begin{itemize}
+%\item Determining ox stress levels - markers for oxidative stress and how to measure them. Death, normal stuff RNA stuff?
+%\item Determining wound healing promotion - scratch test and if time allows, a 3D skin model, e.g. MatTek EpiDerm FT.
+%\item Draw a graph that has extent of ox stress and healing promotion on y axes, and changing plasma property on x axis
+%\item In the future, would be good to repeat this with bacteria, to see if the effects are similar
+%\end{itemize}
 
 
 
@@ -437,11 +457,44 @@ For example, lipid peroxidation products such as malondialdehyde (MDA) and 4-hyd
 
 \subsubsection{Quantifying Wound Healing Promotion}
 
-\begin{itemize}
-\item Need a skin model - MatTek EpiDerm FT \cite{MattekWebsite} is a possibility. They have done wound healing assays before, cool ones using fluorescence etc.
-\item Simple scratch assay - monolayer of keratinocytes in a petri dish, scratch then and see how long it takes for them to re-grow to confluence. Could be interesting to look at different things alongside this. Ie, have two plates scratched identically - watch one regrow and take the other to look at gene/miRNA expression/oxidative stress/markers of wound healing. Type of keratinocyte changes on activation \cite{Pastar2014epithelialization} and transcription factor induction (e.g. slug \cite{Savagner2005developmental}).
-\item Do keratinocytes need to be wounded to be able to induce the wound healing promotion?! Or is the role of oxidative stress different in wounded and healthy keratinocytes?? \textbf{Figure \ref{fig:wound_diagram}}
-\end{itemize}
+Alongside the quantification of oxidative stress induction, it would be good to investigate the effects of LTP/oxidative stress on factors that are crucial for wound healing.
+As a start it would be good to use keratinocyte cell lines and investigate their activation/proliferation following wounding.
+To do this, a scratch wound assay could be used.
+For this, keratinocytes are grown into confluent layers and then a scratch is made across the plate to simulate the wound.
+The plates can then be watched and imaged over time to determine the rate of "healing", i.e. how fast the gap closes.
+To extend this assay further and to give more information, it would also be of use to look at gene expression/transcription in the keratinocytes to be able to correlate the healing rate with gene expression, and oxidative stress.
+
+To quantify wound healing promotion, I propose investigation the gene expression profile of the keratinocytes, in particular to look for activation through keratin type expression \todo{Check this.... See if this is what I actually mean...!} and something else \todo{More healing genes}.
+These genes are important for........ \todo{Type of keratinocyte changes on activation \cite{Pastar2014epithelialization} and transcription factor induction (e.g. slug \cite{Savagner2005developmental}).}
+
+\subsubsection{Experimental Plan to Combine Oxidative Stress and Wound Healing Investigations}
+
+\begin{enumerate}
+\item Keratinocytes will be prepared in plates suitable for the scratch test assay. 
+Each scratch test assay will be done in duplicate so that one can be monitored to determine wound healing rate, and from the other, keratinocytes can be taken for qPCR analysis.
+The reason for using a scratched plate for the gene expression analysis, is so that the plates are equivalent and the cells have the same "injured" environment, and will be experiencing the same stresses.
+This will also be controlled for carefully by doing multiple scratch test assays under the same conditions and checking that they behave similarly.
+\item Taking the first scratch plate, it will be imaged repeatedly at defined time points, and the gap will be measured. The decrease in gap size over time can then be measured and the healing rate determined.
+\item Taking the second treated plate, keratinocytes will be isolated and their DNA/RNA extracted.
+The appropriate primers will then be used to carry out qPCR to monitor gene expression in the cells.
+\item The aim of the analysis is to be able to determine any correlations between healing rate, oxidative stress level and healing gene expression. This way, it is hoped that it will be possible to find the optimum plasma condition for optimum wound healing and least oxidative stress induction.
+\item This process can then be repeated multiple times for multiple different plasma conditions such as changes in maximum power, power pulse shape and humidity etc.
+\end{enumerate}
+
+If time allows, there are a number of options to follow up this experiment.
+Firstly, it would be really interesting to translate this assay into a more advanced skin model.
+For example, it is possible to purchase full thickness, fully stratified \textit{in vitro} skin.
+MatTek EpiDerm FT \cite{MattekWebsite} is one such model, and it has been used before for wound healing assays.
+Therefore, it would be good to carry out a similar wound healing assay to the scratch test above, on the full thickness skin model and then be able to investigate the gene expressions of keratinocytes, or other skin cell types, in a more realistic environment.
+It would also allow investigation of the effects on deeper tissue, for example the dermis, which contains other types of cells and structures which may be affected by the LTP treatment.
+However, these models are more expensive than cell lines, therefore, it would be a good idea to use cell lines to start with as a proof of concept.
+
+
+%\begin{itemize}
+%\item Need a skin model - MatTek EpiDerm FT \cite{MattekWebsite} is a possibility. They have done wound healing assays before, cool ones using fluorescence etc.
+%\item Simple scratch assay - monolayer of keratinocytes in a petri dish, scratch then and see how long it takes for them to re-grow to confluence. Could be interesting to look at different things alongside this. Ie, have two plates scratched identically - watch one regrow and take the other to look at gene/miRNA expression/oxidative stress/markers of wound healing. Type of keratinocyte changes on activation \cite{Pastar2014epithelialization} and transcription factor induction (e.g. slug \cite{Savagner2005developmental}).
+%\item Do keratinocytes need to be wounded to be able to induce the wound healing promotion?! Or is the role of oxidative stress different in wounded and healthy keratinocytes?? \textbf{Figure \ref{fig:wound_diagram}}
+%\end{itemize}
 
 \subsection{COST jet comparison}
 
