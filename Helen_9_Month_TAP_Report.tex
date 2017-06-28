@@ -26,7 +26,7 @@ labelsep=endash]{caption}
 
 
 \title{9 Month TAP Report}
-\author{By Me :)}
+\author{Helen Davies}
 \date{}							% Activate to display a given date or no date
 
 \begin{document}
@@ -34,8 +34,8 @@ labelsep=endash]{caption}
 
 \section{Low Temperature Plasmas and Wound Healing}
 Wounds and their management present an issue, both in the UK and globally \cite{Posnett2008the}. 
-In particular, chronic wounds present a significant socio-economic burden, with 1-2 \% of the population of developed countries expected to develop a chronic wound during their lifetime \cite{Siddiqui2010chronic}, and the estimated cost of wounds to the national health service (NHS) in 2012/13 was £5 billion \cite{Guest2015health}.
-Alongside this, chronic wounds can have a significant detrimental effect on the mental health of patients, for example, due to pain, odour, mobility issues and stress, as a direct result of having a chronic wound \cite{Persoon2004leg}.
+In particular, chronic wounds present a significant socio-economic burden, with 1-2 \% of the population of developed countries expected to develop a chronic wound during their lifetime \cite{Siddiqui2010chronic}, and the estimated cost of wounds to the national health service (NHS) in 2012/13 was \pounds5 billion \cite{Guest2015health}.
+Alongside this, as a direct result of having a chronic wound, patients can experience significant detrimental effects on their mental health, for example, due to pain, odour, mobility issues and stress \cite{Persoon2004leg}.
 New wound treatment strategies are being sought, with aims to accelerate the wound healing process and decrease the bacterial load in the wound, to decrease the risk of infection.
 One technique under investigation is low temperature plasma (LTP) treatment, which has shown promise for both reducing bacterial loads in wounds and promoting the healing process \cite{Kong2009plasma, Kramer2013suitability, Isbary2012successful, Isbary2010a}.
 
@@ -59,7 +59,7 @@ The overall aims of the project are to investigate the use of low temperature ai
 \section{Work to Date}
 \subsection{Simulations}
 In the last few months I have been continuing with plasma simulations, in particular, the development of a comprehensive nitrogen chemistry set for use in GlobalKin.
-GlobalKin is a global plasma chemistry model that calculated time evolved species densities given plasma power, geometry and feed gas, as shown in \textbf{figure \ref{fig:GlobalKin}} \cite{Stafford2004O2}.
+GlobalKin is a global plasma chemistry model that calculates time evolved species densities given plasma power, geometry and feed gas, as shown in \textbf{figure \ref{fig:GlobalKin}} \cite{Stafford2004O2}.
 For detailed information on this model, please refer to my 3 and 6 month TAP reports.
 
 In the last TAP meeting I presented the nitrogen chemistry set, with its 31 species and over 200 reactions including electron impact reactions, heavy particle reactions and vibrational kinetics.
@@ -85,9 +85,9 @@ e^- + N_2(X,v=1) \rightarrow N_2(X,v=0) + e^-
 \label{eqn:SuperelasticVibrational}
 \end{equation}
 Reactions involving vibrationally excited states also have an impact on nitrogen dissociation and gas heating, therefore, should be included to make the model as realistic as possible.
-The first type of reactions to include are V-T reactions. These are particularly important for gas heating and are when vibrationally excited states collide with either molecular or atomic nitrogen as follows:
+The first type of reactions to include are V-T reactions. These are particularly important for gas heating and are when vibrationally excited states collide with either ground state molecular or atomic nitrogen as follows:
 \begin{equation}
-N_2(X,v=n) + N_2 (X,v=0) \rightarrow N_2(X,v=n-1) + N_2(X,v=0)
+N_2(X,v=n) + N_2 \rightarrow N_2(X,v=n-1) + N_2
 \label{eqn:V-TN2}
 \end{equation}
 \begin{equation}
@@ -97,7 +97,7 @@ N_2(X,v=n) + N \rightarrow N_2(X,v=n-1) + N
 
 The second type are V-V reactions, where two vibrationally excited states collide and vibrational energy is transferred between molecules, as follows:
 \begin{equation}
-N_2(X,v=w) + N_2 (X,v=n) \rightarrow N_2(X,v=w-1) + N_2(X,v=n+1)
+N_2(X,v=n) + N_2 (X,v=w-1) \rightarrow N_2(X,v=w) + N_2(X,v=n-1)
 \label{eqn:V-V}
 \end{equation}
 
@@ -105,90 +105,92 @@ GlobalKin requires each heavy particle reaction to have a rate specified in Arrh
 
 \subsubsection{Vibration-Vibration Reaction Rates}
 
-Whilst most reaction rates can be found in literature, rates for vibration-vibration (V-V) reactions are not widely available, other than for n = 1 $\rightarrow$ 0 and it's reverse reaction.
-Some rates are stated in Billing and Fisher, 1979 \cite{Billing1979vv}, however, in a recent paper from Pintassilgo and Guerra \cite{Pintassilgo2017modelling}, new rates were published for both V-V and V-T reactions, where $n = 0\rightarrow 1$ (and the reverse reaction $n = 1\rightarrow0$.) 
+Whilst most reaction rates can be found in literature, rates for vibration-vibration (V-V) reactions are not widely available, other than for n = 1 $\rightarrow$ 0 and the reverse reaction (n = 0 $\rightarrow$ 1).
+Some rates are stated in Billing and Fisher, 1979 \cite{Billing1979vv}, however, in a recent paper from Pintassilgo and Guerra \cite{Pintassilgo2017modelling}, new rates were published for both V-V and V-T reactions, where $n = 1 \rightarrow 0$ (and the reverse reaction $n = 0 \rightarrow 1$.) 
 Importantly, this paper also referenced equations for calculating rates from Alves \textit{et al}, 2012 \cite{Alves2012capacitively}, which means that further reaction rates, for different vibrational quantum numbers ($n$ and $w$) can be calculated.
 
 Using the equations in \cite{Alves2012capacitively}, I have tried to replicate the rates published in \cite{Pintassilgo2017modelling}.
 However, so far, I have been unable to replicate the rates.
 As shown in \textbf{figure \ref{fig:paper_vs_equations}}, whilst the trend in the data matches, unfortunately, the absolute numbers are not replicable, with the calculated rates (solid lines) being consistently lower than those published in \cite{Pintassilgo2017modelling} (points).
 
-I have tried reproducing this many times, both by hand and using Matlab scripts, and I have cross checked with different publications that give parts of the equations. 
-I have found one typo between two different papers, but changing that made it more wrong.
-I have tried different temperatures, to see if maybe they have stated the wrong temperatures for the rates, but nothing works.
-Andrew Gibson has also had a look and is unsure of why everything doesn't match.
-Therefore, I have emailed the author, Vasco Guerra, with the issues I am having to see if he will be able to shed any light on the problem.
-I think that the most likely issue is that either there is a typographical error in the Alves \textit{et al} equations, or that Pintassilgo and Guerra have used some form of correction factor to calculate the rates, and not included it in their publication. \todo{Maybe re-write this with better wording... less frustration...!}
+I have tried reproducing this many times, both by hand and using Matlab scripts, and I have cross checked with different publications that give parts of the equations to check for any obvious typographical errors. 
+%I have found one typo between two different papers, but changing that made it more wrong.
+I have tried different temperatures, to see if maybe they have stated the wrong temperatures for the rates, but that doesn't help either.
+Following discussion with Andrew Gibson, who is also unsure as to why there are discrepancies, I have emailed the author, Vasco Guerra with the issues I am having to see if he will be able to shed any light on the problem.
+I think that the most likely issue is that either there is a typographical error in the Alves \textit{et al} equations, or that Pintassilgo and Guerra have used some form of correction factor to calculate the rates, and not included it in their publication. 
 
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{Figures/paper_vs_equations}
-\caption{VV rates from Pintassilgo and Guerra, 2017 \cite{Pintassilgo2017modelling} shown by the points. VV rates calculated from equations by Alves \textit{et al}, 2012 \cite{Alves2012capacitively} shown by the solid lines. Red shows $N_2(v=1) + N_2(v=w-1) \rightarrow N_2(v=0) + N_2(v=w)$, while the blue represents the reverse reaction}
+\caption{V-V rates from Pintassilgo and Guerra, 2017 \cite{Pintassilgo2017modelling} shown by the points. V-V rates calculated from equations by Alves \textit{et al}, 2012 \cite{Alves2012capacitively} shown by the solid lines. Red shows rates for n=1 $\rightarrow$ 0 and w = 1 - 20, and blue shows the reverse reaction (n = 0 $\rightarrow$ 1).}
 \label{fig:paper_vs_equations}
 \end{figure}
 
-\subsubsection{Vibration-Translation Reaction Rates}
+%\subsubsection{Vibration-Translation Reaction Rates}
+%
+%Vibration-Translation reactions are also important reactions to include as they are one of the main gas heating mechanisms in nitrogen plasmas \cite{Pintassilgo2017modelling}. 
+%These have been included in my chemistry set until now, with rates taken from Billing and Fisher, 1979 \cite{Billing1979vv}. 
+%However, it was thought that these rates were too high, therefore a new method for calculating the rates has been presented by Guerra \textit{et al} \cite{Guerra2004kinetic} and again by Alves \textit{et al} \cite{Alves2012capacitively}.
+%This is the method referenced by Pintassilgo and Guerra in their publication earlier this year \cite{Pintassilgo2017modelling}.
+%However, as with the V-V reaction rates shown above, using the equations referenced, I have been unable to replicate the rates they present in a graph in their paper.
+%The two sets of rates are shown in \textbf{figure \ref{fig:atomic_VT_comparison}}.
+%Unfortunately, there are many orders of magnitude difference between the rates, which is not helpful :-(.
+%
+%Similarly to the V-V rate discrepancies, I have tried many things to fix the problem, but have so far been unsuccessful.
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\textwidth]{Figures/atomic_VT_comparison}
+%\caption{VT rates comparison}
+%\label{fig:atomic_VT_comparison}
+%\end{figure}
 
-Vibration-Translation reactions are also important reactions to include as they are one of the main gas heating mechanisms in nitrogen plasmas \cite{Pintassilgo2017modelling}. 
-While these have been included in my chemistry set until now, they have been taken from Billing and Fisher, 1979 \cite{Billing1979vv}, however, it was thought that these rates were too high, therefore a new method for calculating the rates has been presented by Guerra \textit{et al} \cite{Guerra2004kinetic} and again by Alves \textit{et al} \cite{Alves2012capacitively}.
-This is the method referenced by Pintassilgo and Guerra in their publication earlier this year \cite{Pintassilgo2017modelling}.
-However, as with the V-V reaction rates shown above, using the equations referenced, I have been unable to replicate the rates they present in a graph in their paper.
-The two sets of rates are shown in \textbf{figure \ref{fig:atomic_VT_comparison}}.
-Unfortunately, there are many orders of magnitude difference between the rates, which is not helpful :-(.
-
-Similarly to the V-V rate discrepancies, I have tried many things to fix the problem, but have so far been unsuccessful.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.7\textwidth]{Figures/atomic_VT_comparison}
-\caption{VT rates comparison}
-\label{fig:atomic_VT_comparison}
-\end{figure}
-
-\subsubsection{Testing Vibrational Kinetics Rates}
-
-To test what difference the different rates have, it would be useful to be able to see what effects the different rates have on the VDF for each case, along with the atomic nitrogen density.
-However, there are issues with doing this as the moment.
-
-For V-T reactions, the rates shown in Pintassilgo suggest that VT reactions do not happen at an appreciable rate for quantum numbers below 22.
-My chemistry set only contains the first 17 vibrational states of ground state nitrogen, therefore, I would have to neglect the V-T reactions entirely... 
-For V-V reactions, it is hard to test them at this stage, because only having 1-0 and 0-1 skews the VDF anyway, and there are no other rates available that I have found for any other n values, therefore there is nothing to compare against.
+%\subsubsection{Testing Vibrational Kinetics Rates}
+%
+%To test what difference the different rates have, it would be useful to be able to see what effects the different rates have on the VDF for each case, along with the atomic nitrogen density.
+%However, there are issues with doing this as the moment.
+%
+%For V-T reactions, the rates shown in Pintassilgo suggest that VT reactions do not happen at an appreciable rate for quantum numbers below 22.
+%My chemistry set only contains the first 17 vibrational states of ground state nitrogen, therefore, I would have to neglect the V-T reactions entirely... 
+%For V-V reactions, it is hard to test them at this stage, because only having 1-0 and 0-1 skews the VDF anyway, and there are no other rates available that I have found for any other n values, therefore there is nothing to compare against.
 
 \subsection{Pulsed Plasma Simulations}
 
-Since any nitrogen or air plasmas will need to be pulsed, I have investigated using GlobalKin to simulate pulsed plasmas.
-For this, I used a He/O$_2$ chemistry set, developed by Sandra Schr\"oter, and compared the densities of different species, along with the gas temperature.
-GlobalKin calculates time evolved species densities, and allows you to specify a power cycle.
+Since any nitrogen or air plasmas will need to be pulsed (discussed further in \textbf{section \ref{subsec:exp_characterisation}}), I have investigated using GlobalKin to simulate pulsed plasmas by specifying a power cycle.
+For this, I used a He/O$_2$ chemistry set, developed by Sandra Schr\"oter, and compared the density of the hydroxyl radical in both the pulsed and non-pulsed plasmas.
 
-
-\textbf{Figure \ref{fig:pulsed_power}}, shows the different power depositions in the pulsed and non-pulsed situations.
+\textbf{Figure \ref{fig:pulsed_power}}, shows the different power densities over time in the pulsed and non-pulsed situations.
 For both, the plasma geometry (3 x 1 x 1.1 cm channel) and maximum power (13.56 MHz, 60.61 Wcm$^{-3}$) is the same.
-For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the whole channel, whereas for the pulsed situation, the $\mu$ second scale pulses have a rise time of 2.4 $\mu$s, on time of 20 $\mu$s, fall time of 3.1 $\mu$ and the period of the cycle is 100 $\mu$s.
+For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the whole channel, whereas for the pulsed situation, the $\mu$second scale pulses have a rise time of 2.4 $\mu$s, on time of 20 $\mu$s, fall time of 3.1 $\mu$ and the period of the cycle is 100 $\mu$s.
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\textwidth]{Figures/pulse_power}
 \caption{Power}
-\label{fig:pulsed_power}
+\label{subfig:pulsed_power}
 \end{subfigure}
+%\begin{subfigure}{0.5\textwidth}
+%\includegraphics[width=\textwidth]{Figures/pulse_Tgas}
+%\caption{Gas temperature}
+%\end{subfigure}
 \begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{Figures/pulse_Tgas}
-\caption{Gas temperature}
-\end{subfigure}
-\begin{subfigure}{\textwidth}
 \centering
-\includegraphics[width=0.5\textwidth]{Figures/pulse_OH}
+\includegraphics[width=\textwidth]{Figures/pulse_OH}
 \caption{OH Density}
+\label{subfig:pulsed_OH}
 \end{subfigure}
 \caption{Figure showing comparisons for different plasma properties and hydroxyl (OH) density when the power applied to the same plasma channel is either pulsed, or not pulsed. Plasma channel is 3 x 1.1 x 0.1 cm. Power density is 60.61 Wcm$^{-3}$.}
 \end{figure}
 
+\textbf{Figure \ref{subfig:pulsed_power}} shows the difference in the power densities in the pulsed and non pulsed situation, and \textbf{figure \ref{subfig:pulsed_OH}} shows the densities of OH in the two situations over time.
+It can be seen that the OH density falls during the off time, but has not depleted completely before the next pulse arrives, causing breakdown and OH production once more.
+The densities of OH are much lower in the pulsed situation, presumably due to the reduced time for which electrons are energetic enough to cause reactions to happen.
 
-\subsection{Membrane Damage}
+\subsection{LTP-Induced Membrane Damage}
 
 \subsubsection{Aims}
-In collaboration with a biology summer student, we have begun to investigate the effects of LTP treatment on the membrane of \textit{E. coli} MG1655.
-Using a membrane dye, FM4-64, the integrity of the bacterial membrane can be investigated using fluorescence microscopy.
+In collaboration with Paulina Dubiel, a biology summer student, we have begun to investigate the effects of LTP treatment on the membrane of \textit{E. coli} MG1655.
+Using a membrane dye, FM4-64, the integrity of the bacterial membrane following LTP exposure can be investigated using fluorescence microscopy.
 
 \subsubsection{Methods}
 
@@ -209,6 +211,7 @@ The length of treatment was varied between 30 seconds and 120 seconds.
 An untreated control was included. 
 However for future experiments, further controls that will also be included are (1) cells treated only with gas flow and (2)
 cells treated by power only (i.e. power on, but no gas flow so no plasma).
+Also, in future experiments, the temperature of the plasma effluent will also be measured to make sure that isn't changing too much and causing effects of its own.
 
 \subsubsection{Results}
 Cells were treated with plasma for 30, 60, 90 or 120 seconds.
@@ -245,23 +248,29 @@ This way, it should give a clearer idea as to whether the cells are live, with a
 \section{Future Directions}
 
 \subsection{Simulations}
-\subsubsection{V-V and V-T reactions and rates}
+%\subsubsection{V-V and V-T reactions and rates}
 
 Since finding the discrepancies between the calculated and presented V-V and V-T rates, I have emailed Vasco Guerra directly to see if he is able to offer any help on the differences seen.
 Once this has been rectified, hopefully I should have a method for calculating the rates for each reaction for each vibrational quantum number.
 This would be highly beneficial for developing the nitrogen chemistry set further.
 
-
-\todo{When Vasco replies}
-
-\subsubsection{Correcting for Pressure and Other things...}
+In the mean time there are other things to work on in the chemistry set, for example, making sure it is realistic for atmospheric pressure plasmas.
+%\subsubsection{Correcting for Pressure and Other things...}
 Currently, the reaction set I am working from from \cite{Kutasi2016tuning}, is concerned with low pressure plasmas.
-However, my aim is to develop the model for atmospheric pressure plasmas.
-In order to make it suitable for high pressures, I need to make sure that no reactions are missing that are particularly important at high pressures.
-Once such class of reactions are three body reactions \todo{What are 3 body reactions? Are they the ones that require a third body to work? and that the pressure is important because of the probability of that third body being present?}.
+%However, my aim is to develop the model for atmospheric pressure plasmas.
+In order to make it suitable for atmospheric pressure, I need to make sure that no reactions are missing that are particularly important at high pressures.
+Once such class of reactions are three body reactions.
+These are reactions that have three reactants, and are only really likely at higher pressures, due to there being enough chance that three particles can come together at the same time to react. 
 
-Also, need to fix temperature evolution. The model currently gives very weird looking temperature evolution data.
-This is all part of the requirement for benchmarking as there are other things that look weird too, but that can be investigated more by benchmarking. e.g. having real powers and geometry rather than guessing etc.
+Also important to start, is the model benchmarking process.
+For this, atomic nitrogen can be measured in experimental plasmas to compare with the simulated data.
+This will be discussed more in \textbf{section \ref{subsec:exp_characterisation}}.
+%\todo{What are 3 body reactions? Are they the ones that require a third body to work? and that the pressure is important because of the probability of that third body being present?}.
+%I also need to work on the ability of GlobalKin to calculate the time evolved gas temperature.
+%This involves making sure that the correct enthalpies for reactions
+
+%Also, need to fix temperature evolution. The model currently gives very weird looking temperature evolution data.
+%This is all part of the requirement for benchmarking as there are other things that look weird too, but that can be investigated more by benchmarking. e.g. having real powers and geometry rather than guessing etc.
 
 
 %\begin{itemize}
@@ -270,15 +279,21 @@ This is all part of the requirement for benchmarking as there are other things t
 %\item Start adding in oxygen species/reactions following benchmarking of model, or simultaneously using proper version control!!
 %\end{itemize}
 
-\subsubsection{Benchmarking of Nitrogen Model}
+\subsubsection{Extending the Nitrogen Chemistry Set to a N$_2$:O$_2$ Chemistry Set}
 
-To validate the nitrogen model, it is important to compare simulated densities with experimental measurements.
-Therefore, a source for pure nitrogen plasmas is required.
+Following the benchmarking of the nitrogen chemistry set, the next step is to move the chemistry set forward, from being just for nitrogen, to being for nitrogen and oxygen (i.e. air).
+As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra from \cite{Kutasi2016tuning}, as a starting point for reactions with only oxygen species, and ones involving both oxygen and nitrogen.
+
+\subsection{Experimental Plasma Characterisation}
+\label{subsec:exp_characterisation}
+
+For both nitrogen plasmas (for model benchmarking), and for air plasmas, a source is required.
 The plasma source being built has a parallel plate configuration, and will be powered by a nanosecond pulses.
+A diagram of the source configuration is shown in \textbf{figure \ref{fig:plasma_diagram}}.
 Pulsing plasmas allows for more fine tuning of certain properties, such as gas temperature and chemistry.
 Important parameters of the pulsing are the rise and fall times, and the on time.
 
-The on time can then be adjusted to control the chemistry and give an extra level of control (on top of applied power/voltage etc).
+%The on time can then be adjusted to control the chemistry and give an extra level of control (on top of applied power/voltage etc).
 
 Pulsing allows greater control of a plasma operating within a specific parameter range, such as at specific powers.
 This is due to the ability to alter different pulse parameters, such as rise, on, fall, and off times as follows:
@@ -290,29 +305,66 @@ It can be tailored to be long enough for reactions to take place sufficiently, b
 Heating is a particular problem with atmospheric pressure plasmas due to their being many collisions between electrons and neutrals, meaning that even though each collision only transfers a small amount of energy to the neutrals, there are enough collisions to heat the overall gas. 
 Molecular plasmas also have this problem, because molecules are able to store lots of heat energy in their bonds in, for example, vibrationally excited states.
 Therefore, the on time can be tailored so that the on time does not allow for significant heating of the plasma.
-\item Fall time and off time - The fall time should also be short. 
+\item Fall time and off time - This is the time taken for the voltage to fall from maximum to minimum, and the time when the voltage is at the minimum, before the next pulse. The fall time should also be short. 
 During the fall time and the off time between pulses, there is no electric field so electrons lose their energy and the plasma goes out. 
 This means that short lived species, such as atoms, are also lost through, and only longer lived species remain. 
 Following this, some longer lived species will remain until the next pulse, when the voltage rises again and the gas breaks down again.
 \end{itemize}
 
-Therefore, the benchmarking nitrogen plasma will be powered by pulses, with short rise and fall times, and a suitable on time such that the plasma chemistry can progress, but the heating processes are not too great to heat the plasma excessively.
+Therefore, these plasmas will be powered by pulses, with short rise and fall times, and a suitable on time such that the plasma chemistry can progress, but the heating processes are not too great to heat the plasma excessively.
 For this to work, the pulses will be on the nanosecond time scale.
 
-\textbf{Figure \ref{fig:plasma_source}} shows a diagram of the plasma source. \todo{Ask Jerome about the source....}
+%\textbf{Figure \ref{fig:plasma_source}} shows a diagram of the plasma source. \todo{Ask Jerome about the source....}
 
-Once the plasma source is in operation, the aim is to measure atomic nitrogen density using two-photon absorption laser-induced fluorescence (TALIF).
-For this technique, two photons of a specific wavelength will excite ground state nitrogen \todo{Atomic?} to an excited state.
+Once the plasma source is in operation, the aim is to measure the densities of different species using two-photon absorption laser-induced fluorescence (TALIF).
+For benchmarking of the nitrogen model atomic nitrogen will be measured.
+For this technique, two photons of a specific wavelength will excite ground state atomic nitrogen to an excited state.
 The excited state will then decay down a more stable, lower energy state and emit a photon, which can then be detected.
 The problem with this technique is a process called collisional quenching. 
 This is when other species present in the plasma collide with the excited state and therefore, reduces its lifetime.
 This is a problem if not all the quenching partners are known, so to counteract it, plasmas need to be diagnosed on very short timescales.
 Therefore, picosecond laser pulses and very fast detection systems can be used to be able to detect the fluorescence before quenching becomes a problem.
 
-\subsubsection{Extending the nitrogen chemistry to nitrogen:oxygen}
+%\subsubsection{Benchmarking of Nitrogen Model}
+%
+%To validate the nitrogen model, it is important to compare simulated densities with experimental measurements.
+%Therefore, a source for pure nitrogen plasmas is required.
+%The plasma source being built has a parallel plate configuration, and will be powered by a nanosecond pulses.
+%Pulsing plasmas allows for more fine tuning of certain properties, such as gas temperature and chemistry.
+%Important parameters of the pulsing are the rise and fall times, and the on time.
+%
+%The on time can then be adjusted to control the chemistry and give an extra level of control (on top of applied power/voltage etc).
+%
+%Pulsing allows greater control of a plasma operating within a specific parameter range, such as at specific powers.
+%This is due to the ability to alter different pulse parameters, such as rise, on, fall, and off times as follows:
+%\begin{itemize}
+%\item Rise time - This is the time taken for the voltage to rise from 0 to its maximum amplitude. 
+%Ideally this should be as short as possible to give a well characterised, reproducible plasma breakdown.
+%\item On time - This is the time when the voltage stays at its maximum amplitude. 
+%It can be tailored to be long enough for reactions to take place sufficiently, but not too long that too much energy is transferred to heating the plasma. 
+%Heating is a particular problem with atmospheric pressure plasmas due to their being many collisions between electrons and neutrals, meaning that even though each collision only transfers a small amount of energy to the neutrals, there are enough collisions to heat the overall gas. 
+%Molecular plasmas also have this problem, because molecules are able to store lots of heat energy in their bonds in, for example, vibrationally excited states.
+%Therefore, the on time can be tailored so that the on time does not allow for significant heating of the plasma.
+%\item Fall time and off time - The fall time should also be short. 
+%During the fall time and the off time between pulses, there is no electric field so electrons lose their energy and the plasma goes out. 
+%This means that short lived species, such as atoms, are also lost through, and only longer lived species remain. 
+%Following this, some longer lived species will remain until the next pulse, when the voltage rises again and the gas breaks down again.
+%\end{itemize}
+%
+%Therefore, the benchmarking nitrogen plasma will be powered by pulses, with short rise and fall times, and a suitable on time such that the plasma chemistry can progress, but the heating processes are not too great to heat the plasma excessively.
+%For this to work, the pulses will be on the nanosecond time scale.
+%
+%\textbf{Figure \ref{fig:plasma_source}} shows a diagram of the plasma source. \todo{Ask Jerome about the source....}
+%
+%Once the plasma source is in operation, the aim is to measure atomic nitrogen density using two-photon absorption laser-induced fluorescence (TALIF).
+%For this technique, two photons of a specific wavelength will excite ground state atomic nitrogen to an excited state.
+%The excited state will then decay down a more stable, lower energy state and emit a photon, which can then be detected.
+%The problem with this technique is a process called collisional quenching. 
+%This is when other species present in the plasma collide with the excited state and therefore, reduces its lifetime.
+%This is a problem if not all the quenching partners are known, so to counteract it, plasmas need to be diagnosed on very short timescales.
+%Therefore, picosecond laser pulses and very fast detection systems can be used to be able to detect the fluorescence before quenching becomes a problem.
+%
 
-Following the benchmarking of the nitrogen chemistry set, the next step is to move the chemistry set forward, from being just for nitrogen, to being for nitrogen and oxygen (i.e. air).
-As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra from \cite{Kutasi2016tuning}, as a starting point for reactions with only oxygen species, and ones involving both oxygen and nitrogen.
 
 
 %\begin{itemize}
@@ -332,12 +384,14 @@ As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra 
 \label{fig:plasma_diagram}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{Figures/Harry}
-\caption{Haribo $<$3}
-\label{fig:plasma_source}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=\textwidth]{Figures/Harry}
+%\caption{Haribo $<$3}
+%\label{fig:plasma_source}
+%\end{figure}
+
+
 
 \subsection{Effects of LTP on Wound Healing}
 %
@@ -354,11 +408,15 @@ As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra 
 \subsubsection{Human Skin and the Healing Response}
 
 The skin has three layers.
-From superficial to deep, these are the epidermis, the dermis and the hypodermis, each of which have a different cellular composition and function as follows: \todo{Check where immune cells hang out...}
+From superficial to deep, these are the epidermis, the dermis and the hypodermis, each of which have a different cellular composition and function as follows: %\todo{Check where immune cells hang out...}
 \begin{itemize}
-\item The epidermis is made up of keratinocytes and is split from the dermis by a basement membrane. On the basement membrane, there are basal cells which produce the keratinocytes, melanocytes and sensory cells. Keratinocytes then move upwards from the basal layer, begin to produce keratin and then die. The surface of skin is, therefore, dead keratinocytes and keratin, which gives a waterproof barrier, and is sloughed off over time, to allow new keratinocytes up to the surface \toref{A skin paper!}
-\item Dermis is composed of dense, irregular connective tissues, sweat glands, hair follicles and blood vessels \toref{}
-\item Hypodermis consists mainly of loose connective tissue and fatty tissue \toref{}
+\item The epidermis is anchored to the dermis by a basement membrane, on which are epidermal stem cells, which are responsible for the continuous production of new keratinocytes.
+As keratinocytes develop, the move upwards in the epidermis, through different layers, becoming increasingly differentiated, until they reach the most superficial layer, the stratum corneum. 
+By this layer, the keratinocytes are terminally differentiated and dead, and are surrounded by keratins, cross-linked proteins and lipids, which together make skin impermeable.
+Over time, this top layer is lost and replaced by keratinocytes underneath \cite{Mancini2014micro}.
+%The epidermis is made up of keratinocytes and is split from the dermis by a basement membrane. On the basement membrane, there are basal cells which produce the keratinocytes, melanocytes and sensory cells. Keratinocytes then move upwards from the basal layer, begin to produce keratin and then die. The surface of skin is, therefore, dead keratinocytes and keratin, which gives a waterproof barrier, and is sloughed off over time, to allow new keratinocytes up to the surface \toref{A skin paper!}
+\item Dermis is composed of dense, irregular connective tissues, sweat glands, hair follicles and blood vessels \cite{Mancini2014micro}
+\item Hypodermis consists mainly of fatty tissue to support the connective tissue above \cite{Mancini2014micro}
 \end{itemize}
 
 Following wounding, the skin commences a well-defined healing phases: (1) coagulation and haemostasis, (2) inflammation, (3) proliferation and re-epithelialisation, and (4) wound remodelling \cite{Velnar2009the}.
@@ -400,16 +458,16 @@ The aims of the biology arm of this project are as follows:
 \item Determine how different plasma treatments can affect the biology outcomes
 \end{enumerate}
 
-In particular, it will be of interest to look at the differential effects of LTP treatment on both healthy skin/skin cells, as well as the "wounded" skin cells immediately at the wound edge.
-This is because, even though they are the same cell type, their immediate environment will be very different.
-A diagram of this concept is shown in \textbf{figure \ref{fig:wound_diagram}}.
+%In particular, it will be of interest to look at the differential effects of LTP treatment on both healthy skin/skin cells, as well as the "wounded" skin cells immediately at the wound edge.
+%This is because, even though they are the same cell type, their immediate environment will be very different.
+%A diagram of this concept is shown in \textbf{figure \ref{fig:wound_diagram}}.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{Figures/wound_diagram}
-\caption{A wound...}
-\label{fig:wound_diagram}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.5\textwidth]{Figures/wound_diagram}
+%\caption{A wound...}
+%\label{fig:wound_diagram}
+%\end{figure}
 
 \subsubsection{Detection of Oxidative Stress in Skin Cells}
 
@@ -417,13 +475,20 @@ At low levels, RONS are highly important for normal physiological cell function 
 However, if the concentration of RONS rises excessively for cells, then they can have toxic effects, for example, causing protein damage \cite{PhamHuy2008free}, lipid peroxidation \cite{Ayala2014lipid} and DNA damage \cite{Dizdaroglu2012oxidatively}, leading ultimately to cell death.
 
 In order to detect oxidative stress induced by plasma treatment, a suitable end point to measure needs to be determined.
-It seems that there are at least three ways to go about this, as follows:
+The overall aim is the find a marker that is able to respond sensitively to changes in the degree of oxidative stress being experienced by the cell.
+This way, it is hoped that the marker can distinguish the degree of stress in cells across the whole scale from barely stressed, to almost being killed due to excessive stress.
+
+It seems that there are at least three ways to go about measuring oxidative stress, as follows:
 \begin{enumerate}
 \item Monitoring cell death.
 This is a very nonspecific measurement, though it gives a rough overall picture of how damaging a treatment is, looking at the percentage of a cell population that can survive.
 \item Measuring products of RONS attack.
-For example, lipid peroxidation products such as malondialdehyde (MDA) and 4-hydroxynonenal (4-HNE) \cite{Ayala2014lipid} and DNA damage products such as \todo{DNA product - 8-OHdG????}. To do this, fluorescent probes could be used \cite{Ayala2014lipid, Joshi2011nonthermal, Joshi2010control} \todo{Quantitiative??}
-\item Measuring an endpoint at the DNA/RNA/miRNA/gene expression level. Speak to Dmitris.
+For example, lipid peroxidation products such as malondialdehyde (MDA) and 4-hydroxynonenal (4-HNE) \cite{Ayala2014lipid} and DNA damage products such as 8-OHdG. Fluorescent probes can be used to detect these products \cite{Ayala2014lipid, Joshi2011nonthermal, Joshi2010control}.
+\item Measuring an endpoint at the DNA/RNA/miRNA/gene expression level.
+For example, Schmidt \textit{et al}, 2015 discovered that plasma treatment has an effect on regulating the NRF-2 pathway, which is important in oxidative stress. They also found that the mRNA expression of several ROS-scavenger enzymes and peroxiredoxins were upregulated. Examples include GPX1, -3 and -5 \cite{Schmidt2015non}.
+By measuring oxidative stress at this level, it should allow for better quantitation, and therefore, calibration between degree of oxidative stress and the level of the chosen marker.
+To investigate these possibilities more, I will speak to Dmitris Lagos in biology, who is particularly interested in miRNA/RNA expression.
+
 %miRNA in wound healing \cite{Riemondy2014not} - a review suggests wound healing promoted by miR-99 downregulation, and others may also be involved in wound healing. Downregulation of miR-199a-5p and miR-200b supports angiogenesis.
 %miR-200c is involved in wound healing. Downregulation is required for proper healing as upregulation inhibits cell migration during wound repair  \cite{Aunin2017exploring}. 
 %miR-200c is also upregulated by oxidative stress \cite{Magenta2011miR}. Yay.
@@ -462,12 +527,20 @@ As a start it would be good to use keratinocyte cell lines and investigate their
 To do this, a scratch wound assay could be used.
 For this, keratinocytes are grown into confluent layers and then a scratch is made across the plate to simulate the wound.
 The plates can then be watched and imaged over time to determine the rate of "healing", i.e. how fast the gap closes.
-To extend this assay further and to give more information, it would also be of use to look at gene expression/transcription in the keratinocytes to be able to correlate the healing rate with gene expression, and oxidative stress.
+To extend this assay further and to give more information, it would also be of use to look at gene expression/transcription in the keratinocytes to be able to correlate the healing rate with other factors related to wound healing.
 
-To quantify wound healing promotion, I propose investigation the gene expression profile of the keratinocytes, in particular to look for activation through keratin type expression \todo{Check this.... See if this is what I actually mean...!} and something else \todo{More healing genes}.
-These genes are important for........ \todo{Type of keratinocyte changes on activation \cite{Pastar2014epithelialization} and transcription factor induction (e.g. slug \cite{Savagner2005developmental}).}
+%To quantify wound healing promotion, I propose investigation of the gene expression profile of the keratinocytes, in particular to look for activation through keratin type expression.
+Upon wounding, keratinocytes must become activated in order to migrate into the wound site to fill the defect.
+Firstly, they release proinflammatory cytokines and growth factors, such as interleukin 1 (IL-1), tumour necrosis factor $\alpha$ (TNF$\alpha$) and epidermal growth factor (EGF).
+These stimuli then allow keratinocytes to become activated and begin expressing K6,16 and 17, which is essential for keratinocyte migration into the wound \cite{Pastar2014epithelialization}.
+Transcription factors, such as Slug, also helps with initiating keratinocyte migration into the wound by helping to release them from their neighbours \cite{Pastar2014epithelialization, Savagner2005developmental}.
+Factors such as these should all be measurable, and therefore, it would be interesting to see how they are affected by plasma treatment.
 
 \subsubsection{Experimental Plan to Combine Oxidative Stress and Wound Healing Investigations}
+
+The ultimate aim of the biology experiments is to be able to see if there are any correlations between wound healing rate (scratch test), healing factor regulation (RNA/gene expression analysis) and oxidative stress (RNA/miRNA analysis).
+
+A proposed experiment plan is as follows:
 
 \begin{enumerate}
 \item Keratinocytes will be prepared in plates suitable for the scratch test assay. 
@@ -514,15 +587,25 @@ This will be a good opportunity to work with bacteria and will help with my proj
  
 
 \section{Immediate Plans}
-
-
+In the immediate future the plan is to:
 \begin{itemize}
-\item Learn to culture bacteria for COST comparison
-\item Learnt to culture keratinocytes
-\item Decide on biology experiment end points (e.g. oxidative stress, wound healing markers etc). Speak to the relevant experts e.g. Dmitris Lagos for miRNA
+\item Begin benchmarking of the nitrogen model using a pure nitrogen plasma
+\item When Vasco replies, finish sorting out the vibrational kinetics in the nitrogen chemistry set
+\item Learn how to do tissue culture of keratinocytes
+\item Learn to culture bacteria for COST jet comparison
+\item Meet with the appropriate people to be able to find possible markers of both oxidative stress and wound healing to measure in future biology experiments
 \end{itemize}
 
+
+
 \section{Project Outlook}
+The project has 3 main aims that can run in parallel. (1) Simulations (2) Experimental plasma characterisation and (3) Biology.
+
+To progress with the simulations, the nitrogen model requires benchmarking then can be extended to contain oxygen species and reactions.
+Subsequent benchmarking of the air plasma simulations can then run alongside the diagnostics of the experimental air plasma designed for treating cells in the biology experiments.
+To progress with experimental characterisation, the plasma source needs to be finished so that nitrogen and air plasma diagnostics can begin.
+At the same time, the plasma source can be used to treat cells to start developing the biology experiment.
+Once the biology experiment has been sorted, then the biology outcome of different plasma compositions can be tested.
 
 
 
