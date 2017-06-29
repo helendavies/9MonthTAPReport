@@ -116,7 +116,7 @@ As shown in \textbf{figure \ref{fig:paper_vs_equations}}, whilst the trend in th
 I have tried reproducing this many times, both by hand and using Matlab scripts, and I have cross checked with different publications that give parts of the equations to check for any obvious typographical errors. 
 %I have found one typo between two different papers, but changing that made it more wrong.
 I have tried different temperatures, to see if maybe they have stated the wrong temperatures for the rates, but that doesn't help either.
-Following discussion with Andrew Gibson, who is also unsure as to why there are discrepancies, I have emailed the author, Vasco Guerra with the issues I am having to see if he will be able to shed any light on the problem.
+Following discussion with Andrew Gibson (PDRA in YPI), who is also unsure as to why there are discrepancies, I have emailed the author, Vasco Guerra with the issues I am having to see if he will be able to shed any light on the problem.
 I think that the most likely issue is that either there is a typographical error in the Alves \textit{et al} equations, or that Pintassilgo and Guerra have used some form of correction factor to calculate the rates, and not included it in their publication. 
 
 \begin{figure}
@@ -157,9 +157,9 @@ I think that the most likely issue is that either there is a typographical error
 \subsection{Pulsed Plasma Simulations}
 
 Since any nitrogen or air plasmas will need to be pulsed (discussed further in \textbf{section \ref{subsec:exp_characterisation}}), I have investigated using GlobalKin to simulate pulsed plasmas by specifying a power cycle.
-For this, I used a He/O$_2$ chemistry set, developed by Sandra Schr\"oter, and compared the density of the hydroxyl radical in both the pulsed and non-pulsed plasmas.
+For this, I used a He/H$_2$O chemistry set, developed by Sandra Schr\"oter, and compared the density of the hydroxyl radical in both the pulsed and non-pulsed plasmas.
 
-\textbf{Figure \ref{fig:pulsed_power}}, shows the different power densities over time in the pulsed and non-pulsed situations.
+\textbf{Figure \ref{subfig:pulsed_power}}, shows the different power densities over time in the pulsed and non-pulsed situations.
 For both, the plasma geometry (3 x 1 x 1.1 cm channel) and maximum power (13.56 MHz, 60.61 Wcm$^{-3}$) is the same.
 For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the whole channel, whereas for the pulsed situation, the $\mu$second scale pulses have a rise time of 2.4 $\mu$s, on time of 20 $\mu$s, fall time of 3.1 $\mu$ and the period of the cycle is 100 $\mu$s.
 
@@ -180,17 +180,24 @@ For the non-pulsed situation, the power density is 60.61 Wcm$^{-3}$ along the wh
 \label{subfig:pulsed_OH}
 \end{subfigure}
 \caption{Figure showing comparisons for different plasma properties and hydroxyl (OH) density when the power applied to the same plasma channel is either pulsed, or not pulsed. Plasma channel is 3 x 1.1 x 0.1 cm. Power density is 60.61 Wcm$^{-3}$.}
+\label{fig:pulsing}
 \end{figure}
 
-\textbf{Figure \ref{subfig:pulsed_power}} shows the difference in the power densities in the pulsed and non pulsed situation, and \textbf{figure \ref{subfig:pulsed_OH}} shows the densities of OH in the two situations over time.
-It can be seen that the OH density falls during the off time, but has not depleted completely before the next pulse arrives, causing breakdown and OH production once more.
-The densities of OH are much lower in the pulsed situation, presumably due to the reduced time for which electrons are energetic enough to cause reactions to happen.
+%\textbf{Figure \ref{subfig:pulsed_power}} shows the difference in the power densities in the pulsed and non pulsed situation, and 
+\textbf{Figure \ref{subfig:pulsed_OH}} shows the densities of OH in the two situations over time.
+It can be seen that the OH density falls during the off time, but has not depleted completely before the next pulse arrives, causing breakdown and increased OH production in the subsequent cycle.
+The densities of OH are much lower in the pulsed situation, presumably due to the reduced integrated power density.
+
+The implementation of pulsed power into the nitrogen/air chemistry sets will be relatively straightforward having used it for this chemistry set.
 
 \subsection{LTP-Induced Membrane Damage}
 
 \subsubsection{Aims}
 In collaboration with Paulina Dubiel, a biology summer student, we have begun to investigate the effects of LTP treatment on the membrane of \textit{E. coli} MG1655.
+The motivation for this is to determine whether or not plasmas interacting with the bacterial membrane could be one of the mechanisms by which LTP is bactericidal.
+As well as this, it is a good opportunity to learn new skills, both in working with bacteria and with LTP.
 Using a membrane dye, FM4-64, the integrity of the bacterial membrane following LTP exposure can be investigated using fluorescence microscopy.
+
 
 \subsubsection{Methods}
 
@@ -211,7 +218,7 @@ The length of treatment was varied between 30 seconds and 120 seconds.
 An untreated control was included. 
 However for future experiments, further controls that will also be included are (1) cells treated only with gas flow and (2)
 cells treated by power only (i.e. power on, but no gas flow so no plasma).
-Also, in future experiments, the temperature of the plasma effluent will also be measured to make sure that isn't changing too much and causing effects of its own.
+Also, in future experiments, the temperature of the plasma effluent will also be measured to monitor reproducibility and make sure the temperature isn't causing effects of its own.
 
 \subsubsection{Results}
 Cells were treated with plasma for 30, 60, 90 or 120 seconds.
@@ -259,8 +266,10 @@ In the mean time there are other things to work on in the chemistry set, for exa
 Currently, the reaction set I am working from from \cite{Kutasi2016tuning}, is concerned with low pressure plasmas.
 %However, my aim is to develop the model for atmospheric pressure plasmas.
 In order to make it suitable for atmospheric pressure, I need to make sure that no reactions are missing that are particularly important at high pressures.
-Once such class of reactions are three body reactions.
-These are reactions that have three reactants, and are only really likely at higher pressures, due to there being enough chance that three particles can come together at the same time to react. 
+One such class of reactions are three body reactions.
+These are reactions that have three reactants, and are only really likely at higher pressures where there is a high enough particle density.
+% giving an increased probability of the three particles being able to react.
+%there being enough chance that three particles can come together at the same time to react. 
 
 Also important to start, is the model benchmarking process.
 For this, atomic nitrogen can be measured in experimental plasmas to compare with the simulated data.
@@ -287,11 +296,11 @@ As with the nitrogen set, I will use the chemistry set provided by Vasco Guerra 
 \subsection{Experimental Plasma Characterisation}
 \label{subsec:exp_characterisation}
 
-For both nitrogen plasmas (for model benchmarking), and for air plasmas, a source is required.
+For both nitrogen plasmas (for model benchmarking), and for air plasmas, a plasma source is required.
 The plasma source being built has a parallel plate configuration, and will be powered by a nanosecond pulses.
 A diagram of the source configuration is shown in \textbf{figure \ref{fig:plasma_diagram}}.
 Pulsing plasmas allows for more fine tuning of certain properties, such as gas temperature and chemistry.
-Important parameters of the pulsing are the rise and fall times, and the on time.
+Important parameters of the pulsing are the rise and fall times, and the on and off times.
 
 %The on time can then be adjusted to control the chemistry and give an extra level of control (on top of applied power/voltage etc).
 
@@ -307,7 +316,7 @@ Molecular plasmas also have this problem, because molecules are able to store lo
 Therefore, the on time can be tailored so that the on time does not allow for significant heating of the plasma.
 \item Fall time and off time - This is the time taken for the voltage to fall from maximum to minimum, and the time when the voltage is at the minimum, before the next pulse. The fall time should also be short. 
 During the fall time and the off time between pulses, there is no electric field so electrons lose their energy and the plasma goes out. 
-This means that short lived species, such as atoms, are also lost through, and only longer lived species remain. 
+This means that short lived species, such as atoms, are also lost through recombination, and only longer lived species may remain. 
 Following this, some longer lived species will remain until the next pulse, when the voltage rises again and the gas breaks down again.
 \end{itemize}
 
@@ -316,14 +325,16 @@ For this to work, the pulses will be on the nanosecond time scale.
 
 %\textbf{Figure \ref{fig:plasma_source}} shows a diagram of the plasma source. \todo{Ask Jerome about the source....}
 
-Once the plasma source is in operation, the aim is to measure the densities of different species using two-photon absorption laser-induced fluorescence (TALIF).
-For benchmarking of the nitrogen model atomic nitrogen will be measured.
-For this technique, two photons of a specific wavelength will excite ground state atomic nitrogen to an excited state.
-The excited state will then decay down a more stable, lower energy state and emit a photon, which can then be detected.
-The problem with this technique is a process called collisional quenching. 
-This is when other species present in the plasma collide with the excited state and therefore, reduces its lifetime.
-This is a problem if not all the quenching partners are known, so to counteract it, plasmas need to be diagnosed on very short timescales.
-Therefore, picosecond laser pulses and very fast detection systems can be used to be able to detect the fluorescence before quenching becomes a problem.
+Once the plasma source is in operation, the aim is to measure the densities of different species using optical and laser spectroscopy.
+
+%two-photon absorption laser-induced fluorescence (TALIF).
+%For benchmarking of the nitrogen model atomic nitrogen will be measured.
+%For this technique, two photons of a specific wavelength will excite ground state atomic nitrogen to an excited state.
+%The excited state will then decay down a more stable, lower energy state and emit a photon, which can then be detected.
+%The problem with this technique is a process called collisional quenching. 
+%This is when other species present in the plasma collide with the excited state and therefore, reduces its lifetime.
+%This is a problem if not all the quenching partners are known, so to counteract it, plasmas need to be diagnosed on very short timescales.
+%Therefore, picosecond laser pulses and very fast detection systems can be used to be able to detect the fluorescence before quenching becomes a problem.
 
 %\subsubsection{Benchmarking of Nitrogen Model}
 %
@@ -380,7 +391,7 @@ Therefore, picosecond laser pulses and very fast detection systems can be used t
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{Figures/plasma_diagram}
-\caption{Plasma source}
+\caption{Plasma Source Design}
 \label{fig:plasma_diagram}
 \end{figure}
 
@@ -419,7 +430,7 @@ Over time, this top layer is lost and replaced by keratinocytes underneath \cite
 \item Hypodermis consists mainly of fatty tissue to support the connective tissue above \cite{Mancini2014micro}
 \end{itemize}
 
-Following wounding, the skin commences a well-defined healing phases: (1) coagulation and haemostasis, (2) inflammation, (3) proliferation and re-epithelialisation, and (4) wound remodelling \cite{Velnar2009the}.
+Following wounding, the skin commences well-defined healing phases: (1) coagulation and haemostasis, (2) inflammation, (3) proliferation and re-epithelialisation, and (4) wound remodelling \cite{Velnar2009the}.
 Evidence suggests that RONS such as NO \cite{Shekhter2005beneficial}, and electric fields \cite{Thakral2013electrical, Messerli2011extracellular} have beneficial effects on the wound healing process, therefore, these are proposed mechanisms for the acceleration in wound healing seen by LTP treatment.
 For more detail, please refer to my 6 month TAP report.
 
@@ -475,7 +486,7 @@ At low levels, RONS are highly important for normal physiological cell function 
 However, if the concentration of RONS rises excessively for cells, then they can have toxic effects, for example, causing protein damage \cite{PhamHuy2008free}, lipid peroxidation \cite{Ayala2014lipid} and DNA damage \cite{Dizdaroglu2012oxidatively}, leading ultimately to cell death.
 
 In order to detect oxidative stress induced by plasma treatment, a suitable end point to measure needs to be determined.
-The overall aim is the find a marker that is able to respond sensitively to changes in the degree of oxidative stress being experienced by the cell.
+The aim is to find a marker that is able to respond sensitively to changes in the degree of oxidative stress being experienced by the cell.
 This way, it is hoped that the marker can distinguish the degree of stress in cells across the whole scale from barely stressed, to almost being killed due to excessive stress.
 
 It seems that there are at least three ways to go about measuring oxidative stress, as follows:
@@ -487,7 +498,7 @@ For example, lipid peroxidation products such as malondialdehyde (MDA) and 4-hyd
 \item Measuring an endpoint at the DNA/RNA/miRNA/gene expression level.
 For example, Schmidt \textit{et al}, 2015 discovered that plasma treatment has an effect on regulating the NRF-2 pathway, which is important in oxidative stress. They also found that the mRNA expression of several ROS-scavenger enzymes and peroxiredoxins were upregulated. Examples include GPX1, -3 and -5 \cite{Schmidt2015non}.
 By measuring oxidative stress at this level, it should allow for better quantitation, and therefore, calibration between degree of oxidative stress and the level of the chosen marker.
-To investigate these possibilities more, I will speak to Dmitris Lagos in biology, who is particularly interested in miRNA/RNA expression.
+To investigate these possibilities more, I will speak to Dmitris Lagos in Biology, who is particularly interested in miRNA/RNA expression.
 
 %miRNA in wound healing \cite{Riemondy2014not} - a review suggests wound healing promoted by miR-99 downregulation, and others may also be involved in wound healing. Downregulation of miR-199a-5p and miR-200b supports angiogenesis.
 %miR-200c is involved in wound healing. Downregulation is required for proper healing as upregulation inhibits cell migration during wound repair  \cite{Aunin2017exploring}. 
@@ -572,7 +583,7 @@ However, these models are more expensive than cell lines, therefore, it would be
 \subsection{COST jet comparison}
 
 COST microplasma jets are designed to be reference plasma sources that behave comparably, with a particular focus on biomedical applications \cite{Golda2016concepts}.
-Recently 4 jets have been compared in the lab, in terms of power, temperature and optical emission.
+Recently 4 jets have been compared in the lab, in terms of power, temperature, optical emission and atomic O density.
 The next step is to determine if all the jets also have comparable abilities to kill bacteria.
 To investigate this, E.coli MG1655 on agar plates will be exposed to the plasma jets and the area of the plates where bacteria has been killed will be analysed, the so-called killing zone.
 This will be a good opportunity to work with bacteria and will help with my project.
